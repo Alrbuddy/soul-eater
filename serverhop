@@ -77,6 +77,8 @@ local Window = Rayfield:CreateWindow({
 
 local Tab = Window:CreateTab("Autofarm", 4483362458) -- Title, Image
 
+
+repeat wait() until game:IsLoaded() wait()
 local Toggle = Tab:CreateToggle({
 	Name = "Money Farm + SERVERHOP",
 	CurrentValue = Settings.Automoney,
@@ -84,7 +86,9 @@ local Toggle = Tab:CreateToggle({
 	Callback = function(Value)
 	Settings.Automoney = Value
 	local counter = 0
+	repeat wait() until game:IsLoaded() wait()
     while Settings.Automoney do
+		repeat wait() until game:IsLoaded() wait()
 			local radiantNpc = game:GetService("Workspace").radiantNpcs.heroDelivery
 			local character = game.Players.LocalPlayer.Character
 			character:MoveTo(radiantNpc.HumanoidRootPart.Position)
