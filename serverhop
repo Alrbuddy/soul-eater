@@ -1,9 +1,14 @@
 repeat wait() until game:IsLoaded() wait()
-game:GetService("Players").LocalPlayer.Idled:connect(function()
-game:GetService("VirtualUser"):ClickButton2(Vector2.new())
-end)
+local args = {
+    [1] = "loadedIn",
+    [2] = {
+        [1] = "meister"
+    }
+}
 
-local Name = "Souleater.json"
+game:GetService("ReplicatedStorage"):WaitForChild("remotes"):WaitForChild("remoteEvent"):FireServer(unpack(args))
+
+local Name = "soulwhat.json"
 
 Des = {}
 if makefolder then
@@ -34,6 +39,13 @@ local function fireProximityPrompt(prompt)
 	end
 end
 
+local queue_on_teleport =
+queue_on_teleport or
+syn and
+    syn.queue_on_teleport [[
+   repeat wait() until game:IsLoaded() wait(5) print("ServerHoped or rejoined")
+   loadstring(game:HttpGet('https://raw.githubusercontent.com/Alrbuddy/soul-eater/main/serverhop'))()]]
+
 
 local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 
@@ -42,9 +54,9 @@ local Window = Rayfield:CreateWindow({
 	LoadingTitle = "Loading",
 	LoadingSubtitle = "by Sirius",
 	ConfigurationSaving = {
-		Enabled = true,
-		FolderName = MoneyFolder, -- Create a custom folder for your hub/game
-		FileName = "Money Farm Soul eater"
+		Enabled = false,
+		FolderName = "", -- Create a custom folder for your hub/game
+		FileName = "Autofarm Soul eater"
 	},
         Discord = {
         	Enabled = false,
@@ -63,12 +75,12 @@ local Window = Rayfield:CreateWindow({
 	}
 })
 
-local Tab = Window:CreateTab("Autofarms", 4483362458) -- Title, Image
+local Tab = Window:CreateTab("Autofarm", 4483362458) -- Title, Image
 
 local Toggle = Tab:CreateToggle({
-	Name = "Money Farm + CD",
-	CurrentValue = false,
-	Flag = "Toggle1",
+	Name = "Money Farm + SERVERHOP",
+	CurrentValue = Settings.Automoney,
+	Flag = "",
 	Callback = function(Value)
 	Settings.Automoney = Value
 	local counter = 0
